@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-
+import sys
 
 class Item:
 
@@ -115,13 +115,14 @@ if __name__ == "__main__":
     items.register('roots', 'query_info=file', get_root)
     items.register('lbs', 'query_info=file', get_lbs)
     items.register('total-time', 'grape-total-time', last_float_space)
-    items.register('message-num', 'metric.cc:264', last_float_space)
-    items.register('message-len', 'metric.cc:217', last_float_space)
+    items.register('message-num', 'metric.cc:277', last_float_space)
+    items.register('message-len', 'metric.cc:230', last_float_space)
     items.register('avg-thread-time', 'avg-thread-time', last_float_space)
     items.register('max-thread-time', 'max-thread-time', last_float_space)
     items.register('aggregated-message-num', 'aggregated', last_float_space)
     items.register('iter-num', 'iter num', last_float_space)
-    items.parse('./nohup.out')
+    items.parse(sys.argv[1])
+#    items.parse('./nohup.out')
     tab = BTable(items.items['roots'], items.items['lbs'], dict((k, items.items.get(k)) for k in ['total-time', 'avg-thread-time', 'aggregated-message-num', 'max-thread-time', 'iter-num', 'message-len']))
     print tab
  #   tab1 = ATable(items.items['roots'], items.items['lbs'], items.items['total-time'])
